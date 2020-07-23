@@ -38,7 +38,7 @@ async function add(message, args) {
 
     await col.insertOne(gear2);
     console.log('inserted.');
-    message.channel.send('Data inserted.');
+    message.channel.send('Gear inserted.');
 
   } catch(err) {
     console.log(err.stack);

@@ -12,7 +12,6 @@ async function updateGear (message, args) {
     update[args[0]] = args[1];
 
     const f = args[0];
-    console.log(args[0]);
 
     const up = await col.updateOne(
       {"discordID": message.author.id}, {$set: update});

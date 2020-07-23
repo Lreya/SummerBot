@@ -1,47 +1,70 @@
 const Discord = require('discord.js');
 const { mongo } = require("../connect");
 
-async function listGear (message, args) {
-  try{
-    const db = mongo.db('summerbot');
-    const col = db.collection('geardb');
+function listGear (message, args) {
+  const db = mongo.db('summerbot');
+  const col = db.collection('geardb');
 
-    const c = db.collection('geardb').find({}).sort({gearscore:-1});
+  const c = db.collection('geardb').find({}).sort({gearscore:-1});
+  const itemsPerPage = 10;
 
-    let i = 0;
-    let listMsg = `#  Family  Character  AP   AAP  DP   GS   Class  Level  Updated
--  ------  ---------  ---  ---  ---  ---  -----  -----  -------`;
-    message.channel.send(`\`\`\`${listMsg}\`\`\``);
+  const headerMsg = `#    Family        Character     AP   AAP  DP   GS    Class        Level  Updated
+---  ------------  ------------  ---  ---  ---  ----  -----------  -----  ---------------`;
+
+  let i, rank;
+  let listMsg = headerMsg;
+
+  i = 0;
+  rank = 1;
 
 
-    c.each(function(err, doc) {
-      console.log(i);
+  c.each(function(err, doc) {
 
-      if(doc)
-      {
-        i++;
-        console.log(doc);
-      } else {
-        // console.log('the last one is null.');
+    if(doc)
+    {
+      listMsg = addToList(doc, listMsg, rank);
+      rank++;
+      i++;
+    } else {
+      if(listMsg !== ''){
+        message.channel.send(`\`\`\`${listMsg}\`\`\``);
+        return;
       }
+    }
+    // 10 entries per "page"
+    if(i === itemsPerPage){
+      message.channel.send(`\`\`\`${listMsg}\`\`\``);
+      // reset i = 0;
+      i = 0;
 
-      if(i == 10){
+      // clear msg
+      listMsg = '';
+    }
+  });
 
-        // send msg
+}
 
-        // reset i = 0;
+function addToList(doc, msg, rank) {
+  let family, character;
 
-        // clear msg
-      }
-    });
+  family = trimEnd(doc.family);
+  character = trimEnd(doc.character);
 
+  msg = msg + `
+${rank.toString().padEnd(3)}  ${family.padEnd(12)}  ${character.padEnd(12)}  ${doc.ap.toString().padEnd(3)}  ${doc.aap.toString().padEnd(3)}  ${doc.dp.toString().padEnd(3)}  ${doc.gearscore.toString().padEnd(4)}  ${doc.class.padEnd(11)}  ${doc.level.toString().padEnd(5)}  ${doc.lastUpdated.padEnd(10)}`
+  // console.log(msg);
+  return msg;
 
-    // console.log(c);
+}
 
-  } catch (err) {
-  } finally {
-
+function trimEnd(msg) {
+  const maxLen = 12;
+  if(msg.length > maxLen)
+  {
+    msg = msg.substring(0, maxLen);
+    // msg += '...';
   }
+  return msg;
 }
 
 module.exports = {
