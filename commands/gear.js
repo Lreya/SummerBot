@@ -10,21 +10,20 @@ async function gear(message, args) {
     const taggedUser = message.mentions.users.first();
 
     let target = message.author.id;
+    let av = message.author.avatarURL();
     if(taggedUser)
     {
       target = taggedUser.id;
+      av = taggedUser.avatarURL();
       // check if other user is tagged and set target = to the other user.
     }
 
     const p = await col.findOne({discordID: target});
 
-    console.log(message.author.id);
-
     if(p === null) {
       message.channel.send(`Please add your gear first using ${prefix}add command.`);
       return;
     }
-    const av = message.author.avatarURL();
     let gs;
 
     p.ap >= p.aap ? gs = p.ap + p.dp : gs = p.aap + p.dp;

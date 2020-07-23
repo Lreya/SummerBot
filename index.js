@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const dbinit = require('./connect.js');
+const mongo = require('./connect.js');
 const { prefix, token, uri} = require('./config.json');
 
 const client = new Discord.Client();
@@ -17,7 +17,7 @@ client.login(token);
 client.on('ready', () =>{
 
   // connect to MongoDB
-  dbinit.connect();
+  mongo.connect();
 
   console.log('SummerBot is ready for action!');
 });
@@ -37,6 +37,25 @@ client.on('message', message => {
   	message.reply('there was an error trying to execute that command!');
   }
 });
+
+function runDB () {
+
+	const db = mongo.mongo.db('summerbot');
+	const col = db.collection('geardb');
+
+	console.log(db);
+	console.log(col);
+
+	col.runCommand('$gt()');
+
+	// db.runCommand( { collMod: "geardb",
+	// validator: { $jsonSchema: {
+	// 	bsonType: "object",
+	// 	required: ["discordID", "ap", "aap", "dp", "level", "character", "family", "class", "gearscore", "lastUpdated"]
+	// }}});
+
+
+};
 
 
 //collector.stop();

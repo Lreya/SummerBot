@@ -9,9 +9,58 @@ async function run() {
     await mongo.connect();
     console.log("Connected correctly to server");
     db = mongo.db('summerbot');
-    col = db.collection('geardb');
+    // col = db.collection('geardb');
     // console.log(db);
     // console.log(col);
+
+    // db.runCommand();
+    col = db.createCollection('geardb', {
+      validator: {
+        $jsonSchema: {
+          bsonType: "object",
+          required: ["discordID", "ap", "aap", "dp", "level", "character", "family", "class", "gearscore", "lastUpdated"],
+          properties: {
+            discordID: {
+              bsonType: "string"
+            },
+            ap: {
+              bsonType: "int",
+              minimum: 0,
+              maximum: 999
+            },
+            aap: {
+              bsonType: "int",
+              minimum: 0,
+              maximum: 999
+            },
+            dp: {
+              bsonType: "int",
+              minimum: 0,
+              maximum: 999
+            },
+            level: {
+              bsonType: "int",
+              minimum: 0,
+              maximum: 99
+            },
+            character: {
+              bsonType: "string"
+            },
+            family: {
+              bsonType: "string"
+            },
+            class: {
+              bsonType: "string"
+            },
+            gearscore: {
+              bsonType: "int"
+            },
+            lastUpdate: {
+              bsonType: "string"
+            }
+          }
+      }
+     }});
 
 
   //   let gear2 = {

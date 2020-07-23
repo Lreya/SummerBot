@@ -8,6 +8,10 @@ async function add(message, args) {
 
   let date = new Date().toDateString();
 
+  let gs;
+
+  args[0] >= args[1] ? gs = args[0] + args[2] : gs = args[1] + args[2];
+
   let gear2 = {
     "discordID": message.author.id,
     "ap": args[0],
@@ -17,6 +21,7 @@ async function add(message, args) {
     "character": args[4],
     "family": args[5],
     "class": args[6],
+    "gearscore": gs,
     "lastUpdated": date
   };
 
@@ -33,7 +38,7 @@ async function add(message, args) {
 
     await col.insertOne(gear2);
     console.log('inserted.');
-    message.channel.send('Data inserted.');
+    message.channel.send('Gear inserted.');
 
   } catch(err) {
     console.log(err.stack);
