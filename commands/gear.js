@@ -24,9 +24,6 @@ async function gear(message, args) {
       message.channel.send(`Please add your gear first using ${prefix}add command.`);
       return;
     }
-    let gs;
-
-    p.ap >= p.aap ? gs = p.ap + p.dp : gs = p.aap + p.dp;
 
     const disp = new Discord.MessageEmbed()
     .setTitle(`${p.family} (${p.character})`)
@@ -37,7 +34,7 @@ async function gear(message, args) {
     .addField('AP', p.ap, true)
     .addField('AAP', p.aap, true)
     .addField('DP', p.dp, true)
-    .addField('Gearscore', gs, false)
+    .addField('Gearscore', p.gearscore, false)
     .setImage('https://media.discordapp.net/attachments/412513029343805442/715770837432664074/worryNo.gif')
     .setFooter(`last updated at ${p.lastUpdated}.`);
 

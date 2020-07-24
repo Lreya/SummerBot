@@ -24,22 +24,22 @@ async function run() {
               bsonType: "string"
             },
             ap: {
-              bsonType: "int",
+              bsonType: "number",
               minimum: 0,
               maximum: 999
             },
             aap: {
-              bsonType: "int",
+              bsonType: "number",
               minimum: 0,
               maximum: 999
             },
             dp: {
-              bsonType: "int",
+              bsonType: "number",
               minimum: 0,
               maximum: 999
             },
             level: {
-              bsonType: "int",
+              bsonType: "number",
               minimum: 0,
               maximum: 99
             },
@@ -53,7 +53,7 @@ async function run() {
               bsonType: "string"
             },
             gearscore: {
-              bsonType: "int"
+              bsonType: "number"
             },
             lastUpdate: {
               bsonType: "string"

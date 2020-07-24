@@ -9,9 +9,17 @@ async function updateGear (message, args) {
     const col = db.collection('geardb');
 
     let update = {};
+    let gs = 0;
     update[args[0]] = args[1];
 
     const f = args[0];
+
+    const p = await col.findOne({discordID: message.author.id});
+
+    if(p === null) {
+      message.channel.send(`Please add your gear first using ${prefix}add command.`);
+      return;
+    }
 
     const up = await col.updateOne(
       {"discordID": message.author.id}, {$set: update});
@@ -41,7 +49,8 @@ ex: \`${prefix}update aap 261\``;
     const usageMsgClass= `Enter a valid class.`;
 
     const field = ['ap', 'aap', 'dp', 'level', 'character', 'family', 'class'];
-    args.forEach( (current, index) => args[index] = current.toLowerCase());
+
+    args[0] = args[0].toLowerCase();
 
     // check if valid field to update.
     let index = field.findIndex(current => current === args[0]);
@@ -56,12 +65,16 @@ ex: \`${prefix}update aap 261\``;
           message.channel.send(usageMsg);
           return;
         }
-      } else if(classes[args[1]]) {
-        args[1] = classes[args[1]];
-      } else {
-        message.channel.send(usageMsgClass);
-        return;
+      } else if(index === 6) {
+        if(classes[args[1]]) {
+          args[1] = classes[args[1]];
+        } else {
+          message.channel.send(usageMsgClass);
+          return;
+        }
+
       }
+
 
       updateGear(message, args);
       // error checking
