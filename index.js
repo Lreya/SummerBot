@@ -38,24 +38,6 @@ client.on('message', message => {
   }
 });
 
-function runDB () {
-
-	const db = mongo.mongo.db('summerbot');
-	const col = db.collection('geardb');
-
-	console.log(db);
-	console.log(col);
-
-	col.runCommand('$gt()');
-
-	// db.runCommand( { collMod: "geardb",
-	// validator: { $jsonSchema: {
-	// 	bsonType: "object",
-	// 	required: ["discordID", "ap", "aap", "dp", "level", "character", "family", "class", "gearscore", "lastUpdated"]
-	// }}});
-
-
-};
 
 
 //collector.stop();
