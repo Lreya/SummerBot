@@ -4,8 +4,9 @@ const { prefix } = require("../config.json");
 
 async function gear(message, args) {
   try{
+    const guild = message.guild.id;
     const db = mongo.db('summerbot');
-    const col = db.collection('geardb');
+    const col = db.collection(guild);
 
     const taggedUser = message.mentions.users.first();
 
