@@ -14,12 +14,12 @@ for (const file of commandFiles) {
 }
 
 client.login(token);
-client.on('ready', () =>{
+client.on('ready', () => {
 
   // connect to MongoDB
   mongo.connect();
 
-  console.log('SummerBot is ready for action!');
+  console.log('SummerBot online');
 });
 
 client.on('message', message => {
@@ -34,10 +34,13 @@ client.on('message', message => {
   	client.commands.get(command).execute(message, args);
   } catch (error) {
   	console.error(error);
-  	message.reply('there was an error trying to execute that command!');
+  	// message.reply('there was an error trying to execute that command!');
   }
 });
 
+client.on('guildCreate', guild => {
 
-
-//collector.stop();
+	// create a new db when joining a new server
+	console.log(`joined a guild id: ${guild.id}`);
+	mongo.createNewDB(guild.id);
+});

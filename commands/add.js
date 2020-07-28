@@ -26,8 +26,9 @@ async function add(message, args) {
   };
 
   try{
+    const guild = message.guild.id;
     const db = mongo.db('summerbot');
-    const col = db.collection('geardb');
+    const col = db.collection(guild);
 
     const p = await col.findOne({discordID: message.author.id});
 

@@ -2,10 +2,11 @@ const Discord = require('discord.js');
 const { mongo } = require("../connect");
 
 function listGear (message, args) {
+  const guild = message.guild.id;
   const db = mongo.db('summerbot');
-  const col = db.collection('geardb');
+  const col = db.collection(guild);
 
-  const c = db.collection('geardb').find({}).sort({gearscore:-1});
+  const c = db.collection(guild).find({}).sort({gearscore:-1});
   const itemsPerPage = 10;
 
   const headerMsg = `#    Family        Character     AP   AAP  DP   GS    Class        Level  Updated
