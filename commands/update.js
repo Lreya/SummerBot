@@ -75,6 +75,12 @@ ex: \`${prefix}update aap 261\``;
           return;
         }
       } else if(index === 6) {
+        if(args[2])
+        {
+          args[1] += ` ${args[2]}`;
+        }
+        args[1] = args[1].toLowerCase();
+
         if(classes[args[1]]) {
           args[1] = classes[args[1]];
         } else {
