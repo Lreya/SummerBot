@@ -12,11 +12,20 @@ async function gear(message, args) {
 
     let target = message.author.id;
     let av = message.author.avatarURL();
+
     if(taggedUser)
     {
       target = taggedUser.id;
       av = taggedUser.avatarURL();
       // check if other user is tagged and set target = to the other user.
+    } else if (args[0]) {
+      let targetUser = await message.guild.members.fetch({ query: args[0], limit: 1 }).then(function(ch) {
+        usr = ch.first();
+        return usr;
+      })
+      .catch(console.error);
+      target = targetUser.user.id;
+      av = targetUser.user.avatarURL();
     }
 
     const p = await col.findOne({discordID: target});
@@ -36,14 +45,13 @@ async function gear(message, args) {
     .addField('AAP', p.aap, true)
     .addField('DP', p.dp, true)
     .addField('Gearscore', p.gearscore, false)
-    .setImage('https://media.discordapp.net/attachments/412513029343805442/715770837432664074/worryNo.gif')
     .setFooter(`last updated at ${p.lastUpdated}.`);
 
     message.channel.send(disp);
 
   } catch(err) {
     console.log(err.stack);
-    message.channel.send('Unsuccessful');
+    // message.channel.send('Unsuccessful');
   } finally {
   }
 }
