@@ -62,7 +62,7 @@ async function createNewDB(guild) {
           gearscore: {
             bsonType: "number"
           },
-          lastUpdate: {
+          lastUpdated: {
             bsonType: "string"
           }
         }}}

@@ -10,24 +10,14 @@ module.exports = {
     .setColor('#3498db')
     .setTitle(`To get started...`)
     .addField(`use the ${prefix}add command to add your gear to the SummerBot`, `${prefix}add <ap> <aap> <dp> <level> <Character> <Family> <class> (without brackets)`, false)
-    .addField(`Available commands:`, `${prefix}add
+    .addField(`Available commands:`,
+`${prefix}add
 ${prefix}update
 ${prefix}list
 ${prefix}gear <@user>
-${prefix}delete`)
-    .setFooter(`Summerbot (beta) by Lreya`);
-
-
-
-    const msg = `To get started, use the \`.add\` command to add your gear to the SummerBot
-\`\`\`
-Available commands:
-.add
-.update
-.list
-.gear @user
-.delete
-\`\`\``;
+${prefix}delete
+${prefix}info`)
+    .setFooter(`Summerbot (beta) by Lreya`, 'https://cdn.discordapp.com/attachments/342241086049091585/743570919200653352/summer1.png');
 
   message.channel.send(disp);
 
