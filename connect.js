@@ -64,6 +64,9 @@ async function createNewDB(guild) {
           },
           lastUpdated: {
             bsonType: "string"
+          },
+          pic: {
+            bsonType: "string"
           }
         }}}
     });

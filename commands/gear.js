@@ -45,7 +45,8 @@ async function gear(message, args) {
     .addField('AAP', p.aap, true)
     .addField('DP', p.dp, true)
     .addField('Gearscore', p.gearscore, false)
-    .setFooter(`last updated at ${p.lastUpdated}.`);
+    .setFooter(`last updated at ${p.lastUpdated}.`)
+    .setImage(p.pic);
 
     message.channel.send(disp);
 

@@ -12,7 +12,7 @@ async function add(message, args) {
 
   args[0] >= args[1] ? gs = args[0] + args[2] : gs = args[1] + args[2];
 
-  let gear2 = {
+  let gear = {
     "discordID": message.author.id,
     "ap": args[0],
     "aap": args[1],
@@ -37,8 +37,7 @@ async function add(message, args) {
       return;
     }
 
-    await col.insertOne(gear2);
-    console.log('inserted.');
+    await col.insertOne(gear);
     message.channel.send('Gear inserted.');
 
   } catch(err) {
