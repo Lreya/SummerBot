@@ -23,10 +23,10 @@ async function updateGear (message, args) {
       return;
     }
 
-    const up = await col.updateOne(
+    await col.updateOne(
       {"discordID": message.author.id}, {$set: update});
 
-    const lastupdated = await col.updateOne(
+    await col.updateOne(
       {"discordID": message.author.id}, {$set: {lastUpdated: date}});
 
     const n = await col.findOne({discordID: message.author.id});

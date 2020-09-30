@@ -12,12 +12,13 @@ module.exports = {
     .addField(`use the ${prefix}add command to add your gear to the SummerBot`, `${prefix}add <ap> <aap> <dp> <level> <Character> <Family> <class> (without brackets)`, false)
     .addField(`Available commands:`,
 `${prefix}add
+${prefix}addpic <link> OR image attachment
 ${prefix}update
 ${prefix}list
 ${prefix}gear <@user>
 ${prefix}delete
 ${prefix}info`)
-    .setFooter(`Summerbot (beta) by Lreya`, 'https://cdn.discordapp.com/attachments/342241086049091585/743570919200653352/summer1.png');
+    .setFooter(`Summerbot (beta) | report any bugs to Lreya#5771`, 'https://cdn.discordapp.com/attachments/342241086049091585/743570919200653352/summer1.png');
 
   message.channel.send(disp);
 
